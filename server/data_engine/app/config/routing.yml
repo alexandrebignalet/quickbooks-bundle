@@ -1,0 +1,6 @@
+quickbooks_bundle:
+    resource: '@QuickbooksBundle/Controller/'
+    type: annotation
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

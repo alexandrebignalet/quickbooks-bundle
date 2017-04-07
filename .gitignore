@@ -1,0 +1,17 @@
+.idea/
+server/data_engine/vendor/
+server/data_engine/app/config/parameters.yml
+server/data_engine/build/
+server/data_engine/phpunit.xml
+server/data_engine/var/*
+!server/data_engine/var/cache
+server/data_engine/var/cache/*
+!server/data_engine/var/cache/.gitkeep
+!server/data_engine/var/logs
+server/data_engine/var/logs/*
+!server/data_engine/var/logs/.gitkeep
+!server/data_engine/var/sessions
+server/data_engine/var/sessions/*
+!server/data_engine/var/sessions/.gitkeep
+!server/data_engine/var/SymfonyRequirements.php
+server/data_engine/web/bundles/

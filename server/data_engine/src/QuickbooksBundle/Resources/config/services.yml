@@ -1,0 +1,23 @@
+parameters:
+
+services:
+
+    qb.repository.oauth_info:
+        class: Quickbooks\Repository\OAuthInfoRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - QuickbooksBundle\Entity\OAuthInfo
+
+    qb.invoices:
+        class: QuickbooksBundle\Service\InvoiceService
+        arguments:
+            - "@qb.repository.oauth_info"
+            - %quickbooks.oauth.consumer_key%
+            - %quickbooks.oauth.consumer_secret%
+
+    qb.customers:
+        class: QuickbooksBundle\Service\CustomerService
+        arguments:
+            - "@qb.repository.oauth_info"
+            - %quickbooks.oauth.consumer_key%
+            - %quickbooks.oauth.consumer_secret%
