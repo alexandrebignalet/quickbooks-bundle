@@ -19,6 +19,8 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     quickbooks.account: ~
     quickbooks.password: ~
+    quickbooks.base_url: "https://sandbox-quickbooks.api.intuit.com/"
+    quickbooks.export_dir: "/tmp/"
     quickbooks.app_token: ~
     quickbooks.oauth.consumer_key: ~
     quickbooks.oauth.consumer_key: ~

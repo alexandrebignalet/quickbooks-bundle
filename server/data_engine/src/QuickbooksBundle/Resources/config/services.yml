@@ -8,16 +8,11 @@ services:
         arguments:
             - QuickbooksBundle\Entity\OAuthInfo
 
-    qb.invoices:
-        class: QuickbooksBundle\Service\InvoiceService
+    qb.entity_manager:
+        class: QuickbooksBundle\Service\QuickbooksEntityService
         arguments:
             - "@qb.repository.oauth_info"
-            - %quickbooks.oauth.consumer_key%
-            - %quickbooks.oauth.consumer_secret%
-
-    qb.customers:
-        class: QuickbooksBundle\Service\CustomerService
-        arguments:
-            - "@qb.repository.oauth_info"
+            - %quickbooks.base_url%
+            - %quickbooks.export_dir%
             - %quickbooks.oauth.consumer_key%
             - %quickbooks.oauth.consumer_secret%

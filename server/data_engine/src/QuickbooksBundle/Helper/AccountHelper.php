@@ -3,11 +3,12 @@
 namespace QuickbooksBundle\Helper;
 
 
-use DataService;
-use IPPAccount;
-use IPPAccountClassificationEnum;
-use IPPAccountSubTypeEnum;
-use IPPAccountTypeEnum;
+
+use QuickBooksOnline\API\Data\IPPAccount;
+use QuickBooksOnline\API\Data\IPPAccountClassificationEnum;
+use QuickBooksOnline\API\Data\IPPAccountSubTypeEnum;
+use QuickBooksOnline\API\Data\IPPAccountTypeEnum;
+use QuickBooksOnline\API\DataService\DataService;
 
 class AccountHelper
 {

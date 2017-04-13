@@ -3,7 +3,7 @@ server:
   ports :
    - "80:80"
   volumes:
-   - C:\Users\Alexandre\Documents\DataEngine\server\:/var/www/html/
+   - /home/alexandre/Documents/quickbooks-bundle/server/:/var/www/html/
   links:
    - database
 phpmyadmin:
