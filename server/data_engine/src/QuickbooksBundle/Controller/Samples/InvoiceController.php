@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace QuickbooksBundle\Controller\Samples;
 
-use QuickbooksBundle\Helper\Address;
 use QuickbooksBundle\Service\QuickbooksEntityService;
 use QuickBooksOnline\API\Data\IPPCustomer;
 use QuickBooksOnline\API\Data\IPPInvoice;
 use QuickBooksOnline\API\Data\IPPItem;
 use QuickBooksOnline\API\Data\IPPLine;
 use QuickBooksOnline\API\Data\IPPLineDetailTypeEnum;
+use QuickBooksOnline\API\Data\IPPPhysicalAddress;
 use QuickBooksOnline\API\Data\IPPPrintStatusEnum;
 use QuickBooksOnline\API\Data\IPPSalesItemLineDetail;
 use QuickBooksOnline\API\Exception\ValidationException;
@@ -51,13 +51,19 @@ class InvoiceController extends Controller
         $invoice->TxnStatus = "Payable";
         $invoice->Balance = 10000;
 
-        $invoice->BillAddr = Address::getPhysicalAddress();
+        $address = new IPPPhysicalAddress();
+        $address->Line1 = "123 Main St";
+        $address->City = "Mountain View";
+        $address->Country = "United States";
+        $address->CountrySubDivisionCode = "CA";
+        $address->PostalCode  = "94043";
+
+        $invoice->BillAddr = $address;
 
         $line = new IPPLine();
         $line->Description = "test";
         $line->Amount = 10000;
 
-        $linedetailTypeEnum = new IPPLineDetailTypeEnum();
         $line->DetailType = "SalesItemLineDetail";
 
         $silDetails = new IPPSalesItemLineDetail();
@@ -74,7 +80,6 @@ class InvoiceController extends Controller
 
         $invoice->RemitToRef = $customer->Id;
 
-        $printStatusEnum = new IPPPrintStatusEnum();
         $invoice->PrintStatus = "NeedToPrint";
 
         $invoice->TotalAmt = 10000;

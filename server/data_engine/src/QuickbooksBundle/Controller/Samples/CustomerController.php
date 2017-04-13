@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace QuickbooksBundle\Controller\Samples;
 
 use QuickbooksBundle\Helper\CustomerHelper;
 use QuickbooksBundle\Service\CustomerService;
