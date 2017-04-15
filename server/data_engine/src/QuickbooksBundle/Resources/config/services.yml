@@ -12,7 +12,7 @@ services:
         class: QuickbooksBundle\Service\QuickbooksEntityService
         arguments:
             - "@qb.repository.oauth_info"
-            - %quickbooks.base_url%
-            - %quickbooks.export_dir%
-            - %quickbooks.oauth.consumer_key%
-            - %quickbooks.oauth.consumer_secret%
+            - "%quickbooks.base_url%"
+            - "%quickbooks.export_dir%"
+            - "%quickbooks.oauth.consumer_key%"
+            - "%quickbooks.oauth.consumer_secret%"

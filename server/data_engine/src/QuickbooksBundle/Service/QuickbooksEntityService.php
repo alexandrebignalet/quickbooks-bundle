@@ -65,9 +65,7 @@ class QuickbooksEntityService
         $this->oauth_info = $repository->get();
 
         if ($this->oauth_info === null)
-        {
             throw new AuthenticationException("Not authenticated to quickbooks");
-        }
 
         $this->consumer_key = $consumer_key;
         $this->consumer_secret = $consumer_secret;

@@ -67,7 +67,7 @@ class OAuthController extends Controller
          */
         if (!$oauth_info->isTokenValid())
         {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->remove($oauth_info);
             $em->flush();
 
@@ -97,7 +97,7 @@ class OAuthController extends Controller
      */
     public function oAuthCallbackUrlAction(Request $request)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         /**
          * @var OAuthInfo $oauth_info
@@ -190,7 +190,7 @@ class OAuthController extends Controller
      */
     private function removeOAuthInfo()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $oauth_info = $em->getRepository('QuickbooksBundle:OAuthInfo')->get();
 
