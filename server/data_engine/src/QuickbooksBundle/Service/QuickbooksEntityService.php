@@ -2,6 +2,7 @@
 
 namespace QuickbooksBundle\Service;
 
+use MongoDB\Driver\Exception\ExecutionTimeoutException;
 use QuickbooksBundle\Entity\OAuthInfo;
 use QuickbooksBundle\Repository\OAuthInfoRepository;
 use QuickBooksOnline\API\Core\CoreConstants;
@@ -10,6 +11,7 @@ use QuickBooksOnline\API\Data\IPPNameBase;
 use QuickBooksOnline\API\DataService\DataService;
 use QuickBooksOnline\API\Security\OAuthRequestValidator;
 use SensioLabs\Security\Exception\RuntimeException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
@@ -49,7 +51,12 @@ class QuickbooksEntityService
     /**
      * @var DataService $data_service
      */
-    protected $data_service;
+    private $data_service;
+
+    /**
+     * @var ServiceContext $service_context
+     */
+    private $service_context;
 
     /**
      * InvoiceService constructor.
@@ -84,6 +91,8 @@ class QuickbooksEntityService
         $service_context->IppConfiguration->BaseUrl->Qbo = $this->base_url;
         $service_context->IppConfiguration->ContentWriter->strategy = CoreConstants::EXPORT_STRATEGY;
         $service_context->IppConfiguration->ContentWriter->exportDir = $this->export_dir;
+
+        $this->service_context= $service_context;
 
         $this->data_service = new DataService($service_context);
         if (!$this->data_service)
@@ -132,7 +141,12 @@ class QuickbooksEntityService
      */
     public function find($ipp_entity)
     {
-        return $this->data_service->findById($ipp_entity);
+        try {
+            return $this->data_service->findById($ipp_entity);
+
+        } catch( Exception $e ) {
+            return null;
+        }
     }
 
     /**
@@ -142,12 +156,13 @@ class QuickbooksEntityService
     public function update($ipp_entity)
     {
         $ipp_entity->sparse = true;
-        $updated_entity = $this->data_service->Update($ipp_entity);
+        $entity_updated = $this->data_service->Update($ipp_entity);
         $error = $this->data_service->getLastError();
 
         if ($error != null)
             throw new RuntimeException($error->getResponseBody(), $error->getHttpStatusCode());
-        return $updated_entity;
+
+        return $entity_updated;
     }
 
     /**
